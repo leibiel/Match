@@ -25,7 +25,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.delegate = self
         collectionView.dataSource = self
     
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,13 +41,45 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath)
+        // Get an CardCollectionViewCell object
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CardCollectionViewCell
+        
+        // Get the card that the collection view is trying to display
+        let card = cardArray[indexPath.row]
+        
+        // Set that card for the cell
+        cell.setCard(card)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        
+        // Get the cell that the user selected
+        let cell = collectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
+        
+        // Get the card that the user selected
+        let card = cardArray[indexPath.row]
+        
+        if card.isFlipped == false {
+            
+            //Flip the card
+            cell.flip()
+            
+            // Set the status of the card
+            card.isFlipped = true
+        }
+        else {
+            //Flip the card back
+            cell.flipBack()
+            
+            // Set the status of the card
+            card.isFlipped = false        
+        }
+        
     }
+
 }
+
 
