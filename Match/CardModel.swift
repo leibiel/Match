@@ -39,7 +39,7 @@ class CardModel {
     
         }
         
-        // To-do: Randomize the array
+        // TODO: Randomize the array
         
         // Return the array
         return generatedCardsArray
